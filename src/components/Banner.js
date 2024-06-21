@@ -38,11 +38,12 @@ export const Banner = () => {
 
   useEffect(() => {
     let ticker = setInterval(() => {
-      tick({ loopNum, setLoopNum, isDeleting, setIsDeleting, text, setText, setDelta }); // Call tick function here
+      tick({ loopNum, setLoopNum, isDeleting, setIsDeleting, text, setText, setDelta });
     }, delta);
-
+  
     return () => { clearInterval(ticker); };
-  }, [delta, text]); // Include delta and text in the dependency array
+  }, [delta, text, tick]); // Include tick function in the dependency array
+  
 
   function handleConnectClick() {
     const section = document.getElementById("connect");
