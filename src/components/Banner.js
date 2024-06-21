@@ -42,7 +42,8 @@ export const Banner = () => {
     }, delta);
   
     return () => { clearInterval(ticker); };
-  }, [delta, text, tick, isDeleting, loopNum]); // Include isDeleting and loopNum in the dependency array
+  }, [delta, text]); // Removed isDeleting and loopNum from the dependency array
+  
   
   
 
