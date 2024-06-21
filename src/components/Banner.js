@@ -5,43 +5,44 @@ import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
+// Define tick function outside the component
+const toRotate = ["Web Developer", "Frontend Developer", "UI/UX Designer(Maybe)"];
+const period = 1100;
+
+const tick = ({ loopNum, setLoopNum, isDeleting, setIsDeleting, text, setText, setDelta }) => {
+  let i = loopNum % toRotate.length;
+  let fullText = toRotate[i];
+  let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
+
+  setText(updatedText);
+
+  if (isDeleting) {
+    setDelta(prevDelta => prevDelta / 2);
+  }
+
+  if (!isDeleting && updatedText === fullText) {
+    setIsDeleting(true);
+    setDelta(period);
+  } else if (isDeleting && updatedText === '') {
+    setIsDeleting(false);
+    setLoopNum(loopNum + 1);
+    setDelta(500);
+  }
+};
+
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const toRotate = ["Web Developer", "Frontend Developer", "UI/UX Designer(Maybe)"];
-  const period = 1100;
-
-  // Declare tick function
-  const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta(prevDelta => prevDelta / 2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(period);
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(500);
-    }
-  };
 
   useEffect(() => {
     let ticker = setInterval(() => {
-      tick(); // Call tick function here
+      tick({ loopNum, setLoopNum, isDeleting, setIsDeleting, text, setText, setDelta }); // Call tick function here
     }, delta);
 
     return () => { clearInterval(ticker); };
-  }, [delta, text, tick]); // Include delta, text, and tick in the dependency array
+  }, [delta, text]); // Include delta and text in the dependency array
 
   function handleConnectClick() {
     const section = document.getElementById("connect");
@@ -74,5 +75,5 @@ export const Banner = () => {
         </Row>
       </Container>
     </section>
-  )
-}
+  );
+};
