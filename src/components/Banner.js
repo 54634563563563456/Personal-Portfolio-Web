@@ -10,8 +10,7 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Frontend Developer", "UI/UX Designer(Maybe)" ];
+  const toRotate = ["Web Developer", "Frontend Developer", "UI/UX Designer(Maybe)"];
   const period = 1100;
 
   useEffect(() => {
@@ -19,8 +18,8 @@ export const Banner = () => {
       tick();
     }, delta);
 
-    return () => { clearInterval(ticker) };
-  }, [text])
+    return () => { clearInterval(ticker); };
+  }, [text]);
 
   const tick = () => {
     let i = loopNum % toRotate.length;
@@ -35,25 +34,18 @@ export const Banner = () => {
 
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
-      setIndex(prevIndex => prevIndex - 1);
       setDelta(period);
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setIndex(1);
       setDelta(500);
-    } else {
-      setIndex(prevIndex => prevIndex + 1);
     }
-  }
-  
+  };
+
   function handleConnectClick() {
     const section = document.getElementById("connect");
     section.scrollIntoView({ behavior: "smooth" });
-}
-
-
-
+  }
 
   return (
     <section className="banner" id="home">
@@ -62,19 +54,19 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Aleksandar`} <span className="txt-rotate" dataPeriod="700" data-rotate='[ "Web Developer", "Innovator", "UI/UX Designer(Maybe)" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>My name is Aleksandar am inspired to create new desigs and learn more!</p>
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <span className="tagline">Welcome to my Portfolio</span>
+                  <h1>{`Hi! I'm Aleksandar`} <span className="txt-rotate" dataPeriod="700" data-rotate='[ "Web Developer", "Innovator", "UI/UX Designer(Maybe)" ]'><span className="wrap">{text}</span></span></h1>
+                  <p>My name is Aleksandar and I am inspired to create new designs and learn more!</p>
                   <button onClick={handleConnectClick}>Let’s Connect <ArrowRightCircle size={25} /></button>
-              </div>}
+                </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img src={headerImg} alt="Header Img" />
                 </div>}
             </TrackVisibility>
           </Col>

@@ -23,7 +23,6 @@ export const Skills = () => {
   const handleAfterChange = (previousSlide, { currentSlide }) => {
     const newCenterIndex = Math.floor(currentSlide + responsive.desktop.items / 2);
     setCenterIndex(newCenterIndex % skills.length);
-    console.log(`Center skill: ${skills[newCenterIndex % skills.length].name}`);
   };
 
   return (
@@ -33,9 +32,7 @@ export const Skills = () => {
           <div className="col-12">
             <div className="skill-bx wow zoomIn">
               <h2>Skills</h2>
-              <p>I am a passionate person who strives to create new things. I am highly motivated and eager to learn.
-                 The future excites me, and I look forward to seeing what I can achieve tomorrow.
-              </p>
+              <p>I am a passionate person who strives to create new things. I am highly motivated and eager to learn. The future excites me, and I look forward to seeing what I can achieve tomorrow.</p>
               <Carousel 
                 responsive={responsive} 
                 infinite={true} 
@@ -59,7 +56,7 @@ export const Skills = () => {
           </div>
         </div>
       </div>
-      <img className="background-image-left" src={colorSharp} alt="Image" />
+      <img className="background-image-left" src={colorSharp} alt="Background" />
     </section>
   );
 };
