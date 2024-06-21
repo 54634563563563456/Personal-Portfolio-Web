@@ -41,7 +41,7 @@ export const Banner = () => {
     }, delta);
 
     return () => { clearInterval(ticker); };
-  }, [delta, text]); // Include delta and text in the dependency array
+  }, [delta, text, tick]); // Include delta, text, and tick in the dependency array
 
   function handleConnectClick() {
     const section = document.getElementById("connect");
