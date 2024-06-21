@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
@@ -13,14 +13,7 @@ export const Banner = () => {
   const toRotate = ["Web Developer", "Frontend Developer", "UI/UX Designer(Maybe)"];
   const period = 1100;
 
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => { clearInterval(ticker); };
-  }, [text]);
-
+  // Declare tick function
   const tick = () => {
     let i = loopNum % toRotate.length;
     let fullText = toRotate[i];
@@ -41,6 +34,14 @@ export const Banner = () => {
       setDelta(500);
     }
   };
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick(); // Call tick function here
+    }, delta);
+
+    return () => { clearInterval(ticker); };
+  }, [delta, text]); // Include delta and text in the dependency array
 
   function handleConnectClick() {
     const section = document.getElementById("connect");
